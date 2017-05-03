@@ -1,0 +1,25 @@
+{
+  "name": "d3globe",
+  "version": "1.0.0",
+  "description": "### Background",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack",
+    "start": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pauliewax/d3globe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pauliewax/d3globe/issues"
+  },
+  "homepage": "https://github.com/pauliewax/d3globe#readme",
+  "dependencies": {
+    "webpack": "^2.4.1"
+  }
+}
