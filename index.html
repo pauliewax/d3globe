@@ -4,9 +4,21 @@
     <meta charset="utf-8">
     <title>GlobeBay D3</title>
     <link rel="stylesheet" href="css/master.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
   </head>
   <body>
-    <script src="./bundle.js" charset="utf-8"></script>
+
+    <form id="searchForm" action="index.html" method="post">
+      <label> Search:
+        <input id="searchQuery" type="text" placeholder="Enter Keywords">
+      </label>
+      <label> Price Range:
+        <input id="priceRange" type="range"  value="20">
+        <p id="rangeValue">20</p>
+      </label>
+    </form>
+
   </body>
+  <script src="./bundle.js" charset="utf-8"></script>
 </html>

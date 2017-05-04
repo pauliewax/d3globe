@@ -1,1 +1,23 @@
 @import 'world.css';
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+}
+
+#searchForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #BEC9D5;
+  height: 800px;
+}
+
+label {
+  padding: 0 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
