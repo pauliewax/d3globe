@@ -6,3 +6,9 @@
 svg {
   background-color: #BEC9D5;
 }
+
+.boston path {
+  fill: #FF0000;
+  stroke: black;
+  cursor: pointer;
+}
