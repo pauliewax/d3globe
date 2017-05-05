@@ -13,14 +13,19 @@
       <label> Search:
         <input id="searchQuery" type="text" placeholder="Enter Keywords">
       </label>
-      <label> Price Range:
-        <input id="priceRange" type="range" value="100" min="0" max="1000" >
-        <p id="priceDisplay">$100</p>
-      </label>
+      <div id="priceRange">
+        <div > $
+          <input id="minPrice" type="text" name="" value="0">
+        </div>
+        <div > $
+          <input id="maxPrice" type="text" name="" value="500">
+        </div>
+      </div>
       <label> Number of Results:
         <input id="numEntries" type="range" min="1" value="10">
         <p id="entriesDisplay">10</p>
       </label>
+      <input type="submit" name="" value="SENDOFF">
     </form>
 
   </body>

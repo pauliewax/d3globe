@@ -15,13 +15,14 @@ svg {
 
 .tooltip {
   position: absolute;
-  width: 200px;
-  height: 100px;
+  width: 150px;
+  height: 80px;
   padding: 2px;
   font: 12px sans-serif;
   background: white;
   pointer-events: none;
   opacity: 0;
   overflow: hidden;
+  text-overflow: ellipsis;
   padding: 5px;
 }

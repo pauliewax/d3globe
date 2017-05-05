@@ -17,7 +17,19 @@ body {
 }
 
 label {
-  padding: 0 0 20px 20px;
   display: flex;
   flex-direction: column;
+}
+
+#priceRange {
+  display: flex;
+  flex-direction: row;
+}
+
+#minPrice {
+  width: 40%;
+}
+
+#maxPrice {
+  width: 40%;
 }
