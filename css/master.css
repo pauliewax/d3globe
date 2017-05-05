@@ -2,10 +2,21 @@
 
 html {
   font-family: sans-serif;
+  font-weight: 700;
 }
 
 body {
   display: flex;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+div {
+  margin: 0 30px;
 }
 
 #searchForm {
@@ -16,20 +27,12 @@ body {
   height: 800px;
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-}
-
 #priceRange {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
-#minPrice {
-  width: 40%;
-}
-
-#maxPrice {
-  width: 40%;
+#submitBtn {
+  margin: 0 30px;
 }

@@ -10,22 +10,24 @@
   <body>
 
     <form id="searchForm" action="index.html" method="post">
-      <label> Search:
+      <label>
+        <p>Search:</p>
         <input id="searchQuery" type="text" placeholder="Enter Keywords">
       </label>
-      <div id="priceRange">
-        <div > $
-          <input id="minPrice" type="text" name="" value="0">
+      <section id="priceRange">
+        <div>$
+          <input id="minPrice" type="text" value="0">
         </div>
-        <div > $
-          <input id="maxPrice" type="text" name="" value="500">
+        <div>$
+          <input id="maxPrice" type="text" value="500">
         </div>
-      </div>
-      <label> Number of Results:
+      </section>
+      <label>
+        <p>Number of Results:</p>
         <input id="numEntries" type="range" min="1" value="10">
         <p id="entriesDisplay">10</p>
       </label>
-      <input type="submit" name="" value="SENDOFF">
+      <input id="submitBtn" type="submit" name="" value="Map It!">
     </form>
 
   </body>
