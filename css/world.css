@@ -1,6 +1,6 @@
 .world path {
   fill: #4BD4E9;
-  stroke: black;
+  stroke: white;
 }
 
 svg {
@@ -11,4 +11,17 @@ svg {
   fill: #FF0000;
   stroke: black;
   cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: white;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+  padding: 5px;
 }
