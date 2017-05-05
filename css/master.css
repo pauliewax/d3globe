@@ -22,7 +22,7 @@ div {
 #searchForm {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   background-color: #BEC9D5;
   height: 800px;
 }
@@ -34,5 +34,5 @@ div {
 }
 
 #submitBtn {
-  margin: 0 30px;
+  margin: 0 30px 30px 30px;
 }
