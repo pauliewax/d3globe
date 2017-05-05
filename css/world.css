@@ -9,7 +9,7 @@ svg {
 
 .mapMarkers path {
   fill: #FF0000;
-  stroke: black;
+  stroke: white;
   cursor: pointer;
 }
 
