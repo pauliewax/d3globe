@@ -16,9 +16,12 @@ label {
 }
 
 div {
-  margin: 0 30px;
+  margin: 0 30px 30px 30px;
 }
 
+h1 {
+  margin: 0 30px 30px 30px;
+}
 #searchForm {
   display: flex;
   flex-direction: column;
