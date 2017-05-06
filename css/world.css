@@ -15,14 +15,29 @@ svg {
 
 .tooltip {
   position: absolute;
-  width: 150px;
-  height: 80px;
-  padding: 2px;
+  width: 10%;
   font: 12px sans-serif;
   background: white;
   pointer-events: none;
   opacity: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tooltip section {
+  margin: 0px;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: gray;
+}
+
+.tooltip img {
+  width: 100%;
+}
+
+
+.tooltip p {
+  font-weight: bold;
 }
