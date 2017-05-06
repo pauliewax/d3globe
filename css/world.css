@@ -5,6 +5,8 @@
 
 svg {
   background-color: #BEC9D5;
+  height: 100vh;
+  width: 80vw;
 }
 
 .mapMarkers path {
@@ -20,17 +22,18 @@ svg {
   background: white;
   pointer-events: none;
   opacity: 0;
-  padding: 5px;
   display: flex;
+  align-items: flex-end;
   flex-direction: column;
 }
 
 .tooltip section {
-  margin: 0px;
+  box-sizing: border-box;
+  width: 100%;
   padding: 5px;
   color: white;
   font-weight: bold;
-  background-color: gray;
+  background-color: red;
 }
 
 .tooltip img {
@@ -39,5 +42,8 @@ svg {
 
 
 .tooltip p {
+  margin: 0px;
+  padding: 5px;
   font-weight: bold;
+  color: black;
 }
