@@ -46095,7 +46095,7 @@ $('#searchForm').submit(function(e){
   if  (globalId !== 'world') {
     $.ajax({
       type: 'GET',
-      url: 'http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords',
+      url: 'https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords',
       dataType:'jsonp',
       data: {
         "SECURITY-APPNAME": "PaulEng-GlobeBay-PRD-608f655c9-1423e662",
@@ -46123,7 +46123,7 @@ $('#searchForm').submit(function(e){
       countryIso = country.dataset.iso;
       $.ajax({
         type: 'GET',
-        url: 'http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords',
+        url: 'https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords',
         dataType:'jsonp',
         data: {
           "SECURITY-APPNAME": "PaulEng-GlobeBay-PRD-608f655c9-1423e662",
@@ -46173,7 +46173,7 @@ function featureBuilder(listing, coords) {
   if (!listing.galleryURL) {
     console.log(`eBay Finding API did not return an image for ${listing.title[0]}`);
   }
-  
+
   let geojsonFeature = {
   type: "Feature",
   geometry: {
