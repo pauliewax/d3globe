@@ -84,17 +84,3 @@ body {
 #submitBtn:hover {
   background-color: #ABB4BF;
 }
-
-@media screen and (max-width: 1000px) {
-  body {
-    flex-direction: column-reverse;
-  }
-  #searchForm {
-    width: 100vw;
-    height: 20%;
-  }
-  svg {
-    width: 100vw;
-    height: 80vh;
-  }
-}
