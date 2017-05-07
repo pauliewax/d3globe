@@ -5,7 +5,7 @@
     <title>GlobeBay D3</title>
     <link rel="stylesheet" href="css/master.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="http://d3js.org/d3.v4.js" charset="utf-8"></script>
   </head>
   <body>
     <form id="searchForm" action="index.html" method="post">
@@ -14,23 +14,25 @@
         <p>Search:</p>
         <input id="searchQuery" type="text" placeholder="Enter Keywords">
       </label>
-      <section id="priceRange">
-        <div>$
+      <label>
+        <p>Price:</p>
+        <section id="priceRange">
           <input id="minPrice" type="text" value="0">
-        </div>
-        <div>$
+          <div>to</div>
           <input id="maxPrice" type="text" value="500">
-        </div>
-      </section>
+        </section>
+      </label>
       <label>
         <p>Number of Results:</p>
-        <input id="numEntries" type="range" min="1" value="10">
-        <p id="entriesDisplay">10</p>
+        <section id="resultSlider">
+          <input id="numEntries" type="range" min="1" value="1">
+          <div id="entriesDisplay">1</div>
+        </section>
       </label>
       <label>
         <select id="siteVersion">
-          <option data-id="world" data-iso="world">World Wide (Number of Results Is For EACH Country, Limit 20)</option>
           <option data-id="US" data-iso="US">United States</option>
+          <option data-id="world" data-iso="world">All Countries</option>
           <option data-id="AT" data-iso="AT">Austria</option>
           <option data-id="AU" data-iso="AU">Australia</option>
           <option data-id="CH" data-iso="CH">Switzerland</option>
@@ -51,7 +53,7 @@
           <option data-id="SG" data-iso="SG">Singapore</option>
         </select>
       </label>
-      <input id="submitBtn" type="submit" name="" value="Map It!">
+      <input id="submitBtn" type="submit" value="Map It!">
     </form>
 
   </body>

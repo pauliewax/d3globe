@@ -1,10 +1,11 @@
 .world path {
   fill: #4BD4E9;
   stroke: white;
+  stroke-width: 1px;
 }
 
 svg {
-  background-color: #BEC9D5;
+  background-color: white;
   height: 100vh;
   width: 80vw;
 }
@@ -18,32 +19,39 @@ svg {
 .tooltip {
   position: absolute;
   width: 10%;
-  font: 12px sans-serif;
-  background: white;
+  font: .9em sans-serif;
+  background: transparent;
   pointer-events: none;
   opacity: 0;
   display: flex;
-  align-items: flex-end;
   flex-direction: column;
 }
 
 .tooltip section {
   box-sizing: border-box;
   width: 100%;
-  padding: 5px;
+  padding: 4%;
   color: white;
   font-weight: bold;
   background-color: red;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .tooltip img {
+  box-sizing: border-box;
   width: 100%;
 }
 
 
 .tooltip p {
-  margin: 0px;
-  padding: 5px;
+  box-sizing: border-box;
+  text-align: right;
+  width: 100%;
+  padding: 4%;
+  color: white;
   font-weight: bold;
-  color: black;
+  background-color: red;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
