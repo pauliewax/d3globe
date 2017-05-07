@@ -85,7 +85,7 @@ body {
   background-color: #ABB4BF;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
   body {
     flex-direction: column-reverse;
   }
