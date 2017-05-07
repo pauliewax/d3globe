@@ -5,7 +5,7 @@
     <title>GlobeBay D3</title>
     <link rel="stylesheet" href="css/master.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://d3js.org/d3.v4.js" charset="utf-8"></script>
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
   </head>
   <body>
     <form id="searchForm" action="index.html" method="post">
@@ -25,14 +25,14 @@
       <label>
         <p>Number of Results:</p>
         <section id="resultSlider">
-          <input id="numEntries" type="range" min="1" value="1">
-          <div id="entriesDisplay">1</div>
+          <input id="numEntries" type="range" min="1" value="20">
+          <div id="entriesDisplay">20</div>
         </section>
       </label>
       <label>
         <select id="siteVersion">
-          <option data-id="US" data-iso="US">United States</option>
           <option data-id="world" data-iso="world">All Countries</option>
+          <option data-id="US" data-iso="US">United States</option>
           <option data-id="AT" data-iso="AT">Austria</option>
           <option data-id="AU" data-iso="AU">Australia</option>
           <option data-id="CH" data-iso="CH">Switzerland</option>
