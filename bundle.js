@@ -87,11 +87,32 @@ let geoPath = d3.geoPath()
   .projection(orthoProjection)
   .pointRadius(5);
 
+let sensitivity = 0.25;
+
+let water = svg.append('g')
+  .attr('class', 'water');
+
+const drawWater = function() {
+  water.append('path')
+    .datum({type: "Sphere"})
+    .attr("d", geoPath)
+    .style('fill', '#4BD4E9')
+    .style('opacity', 0.3)
+    .call(d3.drag()
+      .subject(function() { let r = orthoProjection.rotate(); return {x: r[0] / sensitivity, y: -r[1] / sensitivity}; })
+      .on("drag", function() {
+      orthoProjection.rotate([d3.event.x * sensitivity, -d3.event.y * sensitivity]);
+      svg.selectAll("path").attr("d", geoPath);
+  }));
+}
+/* harmony export (immutable) */ __webpack_exports__["b"] = drawWater;
+
+
 let world = svg.append('g')
   .attr('class', 'world');
 
 const drawMap = function() {
-  let sens = 0.25;
+
   world.selectAll('path')
     .data(__WEBPACK_IMPORTED_MODULE_0__countries__["a" /* worldMap */].features)
     .enter()
@@ -101,13 +122,13 @@ const drawMap = function() {
     .call(d3.drag()
       // rotate is 3-axis, not using gamma but useful to know it exists for autorotate in future.
       // subject used to be origin in v3
-      .subject(function() { let r = orthoProjection.rotate(); return {x: r[0] / sens, y: -r[1] / sens}; })
+      .subject(function() { let r = orthoProjection.rotate(); return {x: r[0] / sensitivity, y: -r[1] / sensitivity}; })
       .on("drag", function() {
-        orthoProjection.rotate([d3.event.x * sens, -d3.event.y * sens]);
+        orthoProjection.rotate([d3.event.x * sensitivity, -d3.event.y * sensitivity]);
         svg.selectAll("path").attr("d", geoPath);
     }));
 };
-/* harmony export (immutable) */ __webpack_exports__["b"] = drawMap;
+/* harmony export (immutable) */ __webpack_exports__["c"] = drawMap;
 
 
 let mapMarkers = svg.append('g')
@@ -46203,7 +46224,8 @@ function featureBuilder(listing, coords) {
 geoJSON.features.push(geojsonFeature);
 }
 
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["b" /* drawMap */])();
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["b" /* drawWater */])();
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["c" /* drawMap */])();
 
 
 /***/ })
