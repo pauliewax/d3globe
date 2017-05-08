@@ -1,63 +1,77 @@
-## GlobeBay D3 Data Visualization
+## GlobeBay D3
 
-### Background
+[Live][site]
 
-GlobeBay is an interactive, visual representation of how eBay listings are distributed geographically.
+GlobeBay is an interactive, single-page visualization of how eBay listings are distributed geographically. It was written with JavaScript, D3.js, jQuery, and HTML.
 
-### Functionality & MVP  
+### About
 
-Users are able to manipulate the map according to the following parameters:
+In order to populate the map, a query is first dispatched to the eBay Finding API based on the parameters specified by the user. A successful query triggers subsequent calls to the Google Maps Geocoding API, requesting longitude and latitude geometry for the location of each eBay listing. All of the relevant information from both API returns is packaged into a geoJSON feature for each listing, which is rendered on the map as a clickable / hoverable marker.
 
-- [ ] Render results that match specific queries
-- [ ] Filter results by price range
-- [ ] Set a limit on the amount of results returned
-- [ ] Sort results by region.
+![screencap]
 
-In addition, this project will include:
+### Implementation
 
-- [ ] A production README
+#### 3D Globe
+The map is an SVG element whose paths are generated from a server-side file containing geodata for country borders. Taking advantage of D3's projections, the geoOrthographic function allows for fairly straightforward rendering of the familiar watersphere we know and love:
 
-### Wireframes
+```javascript
+let orthoProjection = d3.geoOrthographic()
+  .scale(window.innerHeight / 2.2)
+  .rotate([20, 0, 0])
+  .clipAngle(90)
+  .translate([(window.innerWidth * 0.8)/ 2, window.innerHeight / 2]);
 
-This app will consist of a single page, featuring a globe populated with query results. A form will allow users to specify search constraints, and toggles for region-specific results will highlight or deselect the corresponding areas. The worldmap will be draggable, allowing users to rotate the globe in order to change focus. Results will appear as pinpoints on the map, which upon hovering will render a small window with more detailed information relating to the specific result.
+let geoPath = d3.geoPath()
+  .projection(orthoProjection)
 
-![wireframe]
+let world = svg.append('g')
+  .attr('class', 'world');
 
-### Architecture and Technologies
+export const drawMap = function() {
+  world.selectAll('path')
+    .data(worldMap.features)
+    .enter()
+    .append('path')
+    .attr('d', geoPath)
+};
+```
+####  Navigation
+D3 allows for incredible depth of calculation when rotating coordinates - but for those without a background in rotation formalism mathematics (like myself) - creating a pleasant enough user experience for rotating the globe is as simple as setting an event listener for dragging movement, finding the origin of the drag, running the new x / y coordinates through the projection's rotate function, and re-rendering. I also set a variable for a sensitivity multiplier, to reduce how responsive rotation is to mouse movement.
 
-This project will be implemented with the following technologies:
+```javascript
+let sens = 0.25;
 
-- `D3.js` for handling visual representation,
-- `JavaScript` for fetching data,
-- `HTML` and `CSS` for formatting,
-- `eBay API` for access to data,
-- `geoJSON / topoJSON / leaflet` possibly to handle topographic information
+.call(d3.drag()
+  .subject(function() { let r = orthoProjection.rotate(); return {x: r[0] / sens, y: -r[1] / sens}; })
+  .on("drag", function() {
+    orthoProjection.rotate([d3.event.x * sens, -d3.event.y * sens]);
+    svg.selectAll("path").attr("d", geoPath);
+}));
+```
 
-In addition to the entry file, there will be three scripts involved in this project:
+#### Tooltips
+A tooltip displaying listing info appears to the right of the cursor when hovering over a marker. A bit of custom logic was used to determine whether the tooltip was being rendered far enough to the right of the viewport that it would be clipped off (overflow hidden), and if so the x coordinates are recalculated so the tooltip appears at cursor left instead.
 
-`app.js`: this script will handle the necessary logic for dispatching requests to the eBay API, along with rendering the return JSON data.
+```javascript
+.on('mouseover', function(d) {
+  let xCoord;
+  // Tooltip width is set in CSS to 10%, so if the hovered X is further than 87%
+  // to the right of the page  (10% + ~3% for cursor and spacing),
+  // flip the tooltip to appear to the leftside of the cursor
+  if (window.innerWidth * .87 < d3.event.pageX) {
+    xCoord = (d3.event.pageX - (document.getElementsByClassName('tooltip')[0].offsetWidth + 30))
+  } else {
+    xCoord = (d3.event.pageX + 30);
+  }
+  tooltip
+    .html(
+      `<section>${d.properties.title}</section>` + `<img src="${d.properties.img}" />` + `<p>${d.properties.currency} $${d.properties.price}</p>`
+    )
+    .style('left', (xCoord) + "px")
+    .style('top', (d3.event.pageY) + "px");
+})
+```
 
-### Implementation Timeline
-
-**Day 1**: Learn the foundation of `D3.js` and create the basic skeleton necessary for building a data visualization app. Determine whether additional libraries will be required to render geodata or a 3D map.
-
-- Create the appropriate filetree for running a D3 app.
-- Install dependencies required to generate a 3D map.
-
-**Day 2**: Spend the day learning how to use the eBay API. Get comfortable with making AJAX requests to the API, learning what parameters can be specified and how to do so. Figure out whether other languages/libraries will be necessary to manipulate or filter content.
-
-- Successfully dispatch AJAX requests to eBay API
-- Fetch data according to specific query parameters
-
-**Day 3**: Create a draggable, selectable globe in D3.js. Design forms for users to make requests from eBay API.
-
-- Render globe using D3.js
-- Set up frontend interaction to make eBay API requests
-
-
-**Day 4**: Configure population of globe with return JSON from eBay API, allow users to select areas of globe that show data.
-
-- Render API return JSON on D3.js globe
-- Build out region toggling functionality
-
-[wireframe]: ./wireframe.png
+[site]: https://pauliewax.github.io/d3globe/
+[screencap]: ./assets/screencap.png
