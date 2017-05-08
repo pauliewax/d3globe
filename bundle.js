@@ -46194,15 +46194,8 @@ function geocoder(listings) {
     });
 
     $.when.apply($, allRequests).then(function() {
-      if (globalId === 'world') {
-        if (ebayListings[ebayListings.length -1] === listing) {
-          $('#loader').removeClass('loader');
-          console.log(ebayListings[ebayListings.length -1], listing);
-        }
-      } else {
         $('#loader').removeClass('loader');
-      }
-    })
+    });
   } else {
     let searchQuery = $('#searchQuery').val();
     amountEmptyResults += 1;
@@ -46234,7 +46227,7 @@ function featureBuilder(listing, coords) {
   price: listing.sellingStatus[0].convertedCurrentPrice[0].__value__,
   currency: Object.values(listing.sellingStatus[0].convertedCurrentPrice[0])[0], //under key @currencyId, can't be invoked
   url: listing.viewItemURL[0],
-  img: listing.galleryURL[0]
+  img: listing.galleryURL ? listing.galleryURL[0] : ''
   }
 };
 geoJSON.features.push(geojsonFeature);
