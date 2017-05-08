@@ -46071,6 +46071,8 @@ features: [
 ]
 };
 
+let amountEmptyResults;
+
 $('#numEntries').change(function(e){
   $('#entriesDisplay')[0].innerText = `${e.currentTarget.value}`;
 });
@@ -46089,6 +46091,8 @@ $('#searchForm').submit(function(e){
   features: [
   ]
   };
+
+  amountEmptyResults = 0;
 
   if  (globalId !== 'world') {
     $.ajax({
@@ -46145,7 +46149,6 @@ $('#searchForm').submit(function(e){
 function geocoder(listings) {
 
   let ebayListings = listings.findItemsByKeywordsResponse[0].searchResult[0].item;
-
   if (ebayListings) {
     ebayListings.forEach((listing)=>{
       $.ajax({
@@ -46163,7 +46166,15 @@ function geocoder(listings) {
       });
     });
   } else {
+    let globalId = $('#siteVersion').find(':selected').data('id');
+    let searchQuery = $('#searchQuery').val();
+    amountEmptyResults += 1;
     console.log("eBay Finding API returned zero results for a region");
+    if (amountEmptyResults === 19) {
+      alert(`No results found for "${searchQuery}"`);
+    } else if (globalId !== 'world') {
+      alert(`No results found for "${searchQuery}"`);
+    }
   }
 }
 

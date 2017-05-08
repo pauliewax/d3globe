@@ -8,7 +8,7 @@ GlobeBay is an interactive, single-page visualization of how eBay listings are d
 
 In order to populate the map, a query is first dispatched to the eBay Finding API based on the parameters specified by the user. A successful query triggers subsequent calls to the Google Maps Geocoding API, requesting longitude and latitude geometry for the location of each eBay listing. All of the relevant information from both API returns is packaged into a geoJSON feature for each listing, which is rendered on the map as a clickable / hoverable marker.
 
-Because the 'All Countries' search sends a request to each of the nineteen eBay global API endpoints (US, Canada, Spain, etc), number of results per country is capped at 20 to reduce loadtimes.
+Because the 'All Countries' search sends a request to each of the nineteen eBay global API endpoints (US, Canada, Spain, etc), number of results per country is capped at 20 for this setting in order to reduce loadtimes.
 
 ![screencap]
 
