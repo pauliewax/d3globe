@@ -81,7 +81,7 @@ let orthoProjection = d3.geoOrthographic()
   .scale(window.innerHeight / 2.2)
   .rotate([20, 0, 0])
   .clipAngle(90)
-  .translate([(window.innerWidth * 0.8)/ 2, window.innerHeight / 2]);
+  .translate([(window.innerWidth * 0.8 / 2), window.innerHeight / 2]);
 
 let geoPath = d3.geoPath()
   .projection(orthoProjection)
@@ -46107,6 +46107,8 @@ $('#searchForm').submit(function(e){
   globalId = $('#siteVersion').find(':selected').data('id'),
   countryIso = $('#siteVersion').find(':selected').data('iso');
 
+  $('#loader').addClass('loader');
+
   geoJSON = {
   type: "FeatureCollection",
   features: [
@@ -46168,26 +46170,40 @@ $('#searchForm').submit(function(e){
 });
 
 function geocoder(listings) {
-
+  let globalId = $('#siteVersion').find(':selected').data('id');
   let ebayListings = listings.findItemsByKeywordsResponse[0].searchResult[0].item;
+
   if (ebayListings) {
+    let allRequests = [];
     ebayListings.forEach((listing)=>{
-      $.ajax({
-        type: 'GET',
-        url: 'https://maps.googleapis.com/maps/api/geocode/json',
-        dataType:'json',
-        data: {
-          "address": `${listing.location[0]}`,
-          "key": "AIzaSyA0QnQQk7D3mtmaW5IQmxJCdIbMfoAsaOU"
-        },
-        success: function(geocode) {
-          geocode.results[0] ? featureBuilder(listing, geocode.results[0].geometry.location) : console.log(`Google Maps Geocoding API could not find coordinates for ${listing.location}`);
-          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["a" /* drawMarkers */])(geoJSON);
-        },
-      });
+      allRequests.push(
+        $.ajax({
+          type: 'GET',
+          url: 'https://maps.googleapis.com/maps/api/geocode/json',
+          dataType:'json',
+          data: {
+            "address": `${listing.location[0]}`,
+            "key": "AIzaSyA0QnQQk7D3mtmaW5IQmxJCdIbMfoAsaOU"
+          },
+          success: function(geocode) {
+            geocode.results[0] ? featureBuilder(listing, geocode.results[0].geometry.location) : console.log(`Google Maps Geocoding API could not find coordinates for ${listing.location}`);
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["a" /* drawMarkers */])(geoJSON);
+          },
+        })
+      );
     });
+
+    $.when.apply($, allRequests).then(function() {
+      if (globalId === 'world') {
+        if (ebayListings[ebayListings.length -1] === listing) {
+          $('#loader').removeClass('loader');
+          console.log(ebayListings[ebayListings.length -1], listing);
+        }
+      } else {
+        $('#loader').removeClass('loader');
+      }
+    })
   } else {
-    let globalId = $('#siteVersion').find(':selected').data('id');
     let searchQuery = $('#searchQuery').val();
     amountEmptyResults += 1;
     console.log("eBay Finding API returned zero results for a region");
