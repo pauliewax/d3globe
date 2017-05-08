@@ -74,4 +74,4 @@ A tooltip displaying listing info appears to the right of the cursor when hoveri
 ```
 
 [site]: https://pauliewax.github.io/d3globe/
-[screencap]: ./assets/screencap.png
+[screencap]: ./docs/screencap.png
