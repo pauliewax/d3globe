@@ -46176,7 +46176,7 @@ function geocoder(listings) {
   let ebayListings = listings.findItemsByKeywordsResponse[0].searchResult[0].item;
 
   successfulRequests += 1;
-  console.log(successfulRequests);
+
   if (ebayListings) {
     let allRequests = [];
     ebayListings.forEach((listing)=>{
@@ -46210,9 +46210,8 @@ function geocoder(listings) {
     let searchQuery = $('#searchQuery').val();
     amountEmptyResults += 1;
     console.log("eBay Finding API returned zero results for a region");
-    if (amountEmptyResults === 19) {
-      alert(`No results found for "${searchQuery}"`);
-    } else if (globalId !== 'world') {
+    if (amountEmptyResults === 19 || globalId !== 'world') {
+      $('#loader').removeClass('loader');
       alert(`No results found for "${searchQuery}"`);
     }
   }
