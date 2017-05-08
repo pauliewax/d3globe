@@ -77,24 +77,34 @@
 let svg = d3.select('body')
   .append('svg');
 
-let mercProjection = d3.geoMercator()
-  .scale(window.innerWidth * .13)
-  .translate([window.innerWidth/2.6, window.innerHeight/2]);
+let orthoProjection = d3.geoOrthographic()
+  .scale(window.innerHeight / 2.2)
+  .rotate([20, 0, 0])
+  .clipAngle(90)
+  .translate([(window.innerWidth * 0.8)/ 2, window.innerHeight / 2]);
 
 let geoPath = d3.geoPath()
-  .projection(mercProjection)
+  .projection(orthoProjection)
   .pointRadius(5);
 
 let world = svg.append('g')
   .attr('class', 'world');
 
 const drawMap = function() {
-
+  let sens = 0.25;
   world.selectAll('path')
     .data(__WEBPACK_IMPORTED_MODULE_0__countries__["a" /* worldMap */].features)
     .enter()
     .append('path')
-    .attr('d', geoPath);
+    .attr('d', geoPath)
+
+    .call(d3.drag()
+      .subject(function() { let r = orthoProjection.rotate(); return {x: r[0] / sens, y: -r[1] / sens}; })
+      .on("drag", function() {
+        let rotate = orthoProjection.rotate();
+        orthoProjection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+        svg.selectAll("path").attr("d", geoPath);
+    }));
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = drawMap;
 
@@ -143,19 +153,6 @@ const drawMarkers = function(geojson) {
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = drawMarkers;
 
-
-d3.select(window).on('resize', resize);
-
-function resize() {
-  mercProjection = d3.geoMercator()
-    .scale(window.innerWidth * .13)
-    .translate([window.innerWidth/2.6, window.innerHeight/2]);
-  geoPath = d3.geoPath()
-    .projection(mercProjection)
-    .pointRadius(5);
-  world.selectAll('path').attr('d', geoPath);
-  mapMarkers.selectAll('path').attr('d', geoPath);
-}
 
 
 /***/ }),

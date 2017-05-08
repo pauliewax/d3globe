@@ -2,6 +2,7 @@
   fill: #4BD4E9;
   stroke: white;
   stroke-width: 1px;
+  cursor: grabbing;
 }
 
 svg {
