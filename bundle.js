@@ -46093,6 +46093,7 @@ features: [
 };
 
 let amountEmptyResults;
+let successfulRequests;
 
 $('#numEntries').change(function(e){
   $('#entriesDisplay')[0].innerText = `${e.currentTarget.value}`;
@@ -46116,6 +46117,7 @@ $('#searchForm').submit(function(e){
   };
 
   amountEmptyResults = 0;
+  successfulRequests = 0;
 
   if  (globalId !== 'world') {
     $.ajax({
@@ -46173,6 +46175,8 @@ function geocoder(listings) {
   let globalId = $('#siteVersion').find(':selected').data('id');
   let ebayListings = listings.findItemsByKeywordsResponse[0].searchResult[0].item;
 
+  successfulRequests += 1;
+  console.log(successfulRequests);
   if (ebayListings) {
     let allRequests = [];
     ebayListings.forEach((listing)=>{
@@ -46194,7 +46198,13 @@ function geocoder(listings) {
     });
 
     $.when.apply($, allRequests).then(function() {
+      if (globalId === 'world') {
+        if (successfulRequests === 19) {
+          $('#loader').removeClass('loader');
+        }
+      } else {
         $('#loader').removeClass('loader');
+      }
     });
   } else {
     let searchQuery = $('#searchQuery').val();
