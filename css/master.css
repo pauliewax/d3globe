@@ -31,13 +31,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: red;
+  background-color: #43BED1;
   width: 20vw;
   padding: 2%;
 }
 
 #searchForm h1 {
-  text-align: center;
   font-weight: 700;
   font-size: 2em;
   margin-bottom: 5%;

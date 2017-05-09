@@ -46265,7 +46265,6 @@ geoJSON.features.push(geojsonFeature);
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["b" /* drawWater */])();
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["c" /* drawMap */])();
-handleErrors();
 
 // window.onload = function() {
 //   let i = 1;

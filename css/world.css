@@ -1,5 +1,5 @@
 .world path {
-  fill: #4BD4E9;
+  fill: #43BED1;
   stroke: white;
   stroke-width: 1px;
 }
@@ -52,8 +52,8 @@ svg {
   color: white;
   font-weight: bold;
   background-color: red;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .tooltip img {
@@ -70,6 +70,6 @@ svg {
   color: white;
   font-weight: bold;
   background-color: red;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
