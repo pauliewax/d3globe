@@ -139,6 +139,24 @@ body {
   text-transform: uppercase;
 }
 
+#links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}
+
+#links a {
+  margin-right: 10%;
+}
+
+#links a:last-of-type {
+  margin-right: 0;
+}
+
+#links i {
+  color: white;
+}
 .hidden {
   display: none;
 }
