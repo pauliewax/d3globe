@@ -46230,7 +46230,7 @@ function geocoder(listings) {
     console.log("eBay Finding API returned zero results for a region");
     if (badRequests === 19 || globalId !== 'world') {
       $('#loader').removeClass('loader');
-      errors.push(`No results found for ${searchQuery}.`);
+      errors.push(`No results found for "${searchQuery}."`);
     } else if (goodRequests + badRequests === 19){
       $('#loader').removeClass('loader');
     }
@@ -46266,18 +46266,18 @@ geoJSON.features.push(geojsonFeature);
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["b" /* drawWater */])();
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["c" /* drawMap */])();
 
-window.onload = function() {
-  let i = 1;
-  let typist = setInterval(function(){
-    let letters = "Vintage Nintendo Console".split('');
-    $('#searchQuery').val(letters.slice(0,i).join(''));
-    if (i === letters.length) {
-      clearInterval(typist);
-      $('#searchForm').submit();
-    }
-  i += 1;
-  },80);
-};
+// window.onload = function() {
+//   let i = 1;
+//   let typist = setInterval(function(){
+//     let letters = "Vintage Nintendo Console".split('');
+//     $('#searchQuery').val(letters.slice(0,i).join(''));
+//     if (i === letters.length) {
+//       clearInterval(typist);
+//       $('#searchForm').submit();
+//     }
+//   i += 1;
+//   },80);
+// };
 
 
 /***/ })
