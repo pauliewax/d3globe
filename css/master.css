@@ -98,8 +98,15 @@ body {
   font-weight: 700;
   font-size: 1.3em;
   cursor: pointer;
+  margin-bottom: 5%;
 }
 
 #submitBtn:hover {
   background-color: #ABB4BF;
+}
+
+#errors {
+  border: 1px solid blue;
+  background: gray;
+  padding: 3%;
 }
