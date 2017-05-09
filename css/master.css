@@ -105,8 +105,26 @@ body {
   background-color: #ABB4BF;
 }
 
-#errors {
-  border: 1px solid blue;
-  background: gray;
+#errorBox {
   padding: 3%;
+  background: repeating-linear-gradient(
+    45deg,
+    black,
+    black 20px,
+    yellow 10px,
+    yellow 40px
+    );
+}
+
+#errors {
+  opacity: 0.9;
+  background: white;
+  color: black;
+  font-weight: bold;
+  padding: 3%;
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none;
 }
