@@ -144,6 +144,7 @@ const drawMarkers = function(geojson) {
     .enter()
     .append('a')
       .attr('xlink:href', function(d) {return `${d.properties.url}`})
+      .attr('target', '_blank')
     .append('path')
     .attr('d', geoPath)
     .on('mouseover', function(d) {
@@ -46092,7 +46093,7 @@ let geoJSON = {
 
 let badRequests;
 let goodRequests;
-let errors = ["Sorry!"];
+let errors;
 
 $('#numEntries').change(function(e){
   $('#entriesDisplay')[0].innerText = `${e.currentTarget.value}`;
@@ -46107,6 +46108,7 @@ function handleErrors() {
 
 function ebayQuery(e){
   e.preventDefault();
+
   let searchQuery = $('#searchQuery').val(),
   minPrice = $('#minPrice').val(),
   maxPrice = $('#maxPrice').val(),
@@ -46114,17 +46116,21 @@ function ebayQuery(e){
   globalId = $('#siteVersion').find(':selected').data('id'),
   countryIso = $('#siteVersion').find(':selected').data('iso');
 
-  $('#loader').addClass('loader');
+  if (searchQuery !== '') {
+    $('#loader').addClass('loader');
+    errors = ["Sorry!"];
+  } else {
+    errors = ["Sorry!", "Invalid Search Terms."];
+  }
 
   geoJSON = {
   type: "FeatureCollection",
   features: [
   ]
   };
-
   badRequests = 0;
   goodRequests = 0;
-  errors = ["Sorry!"];
+
   handleErrors();
 
   if  (globalId !== 'world') {
@@ -46261,18 +46267,18 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["b" /* drawWater */])
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["c" /* drawMap */])();
 handleErrors();
 
-window.onload = function() {
-  let i = 1;
-  let typist = setInterval(function(){
-    let letters = "Vintage Nintendo Console".split('');
-    $('#searchQuery').val(letters.slice(0,i).join(''));
-    if (i === letters.length) {
-      clearInterval(typist);
-      $('#searchForm').submit();
-    }
-  i += 1;
-  },80);
-};
+// window.onload = function() {
+//   let i = 1;
+//   let typist = setInterval(function(){
+//     let letters = "Vintage Nintendo Console".split('');
+//     $('#searchQuery').val(letters.slice(0,i).join(''));
+//     if (i === letters.length) {
+//       clearInterval(typist);
+//       $('#searchForm').submit();
+//     }
+//   i += 1;
+//   },80);
+// };
 
 
 /***/ })

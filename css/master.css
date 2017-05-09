@@ -37,12 +37,21 @@ body {
 }
 
 #searchForm h1 {
+  text-align: center;
   font-weight: 700;
   font-size: 2em;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
+}
+
+#searchForm summary {
+  margin-bottom: 20%;
 }
 
 #searchForm label {
+  margin-bottom: 5%;
+}
+
+#searchForm label:last-of-type {
   margin-bottom: 5%;
 }
 
@@ -88,6 +97,12 @@ body {
   width: 100%;
   padding: 3%;
   cursor: pointer;
+  margin-bottom: 2%;
+}
+
+#regionNote {
+  font-size: 0.8em;
+  font-style: italic;
 }
 
 #submitBtn {
