@@ -46085,9 +46085,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 let geoJSON = {
-type: "FeatureCollection",
-features: [
-]
+  type: "FeatureCollection",
+  features: [
+  ]
 };
 
 let badRequests;
@@ -46244,8 +46244,18 @@ geoJSON.features.push(geojsonFeature);
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["b" /* drawWater */])();
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["c" /* drawMap */])();
+
 window.onload = function() {
-  $('#searchForm').submit();
+  let i = 1;
+  let typist = setInterval(function(){
+    let letters = "Vintage Nintendo Console".split('');
+    $('#searchQuery').val(letters.slice(0,i).join(''));
+    if (i === letters.length) {
+      clearInterval(typist);
+      $('#searchForm').submit();
+    }
+  i += 1;
+  },80);
 };
 
 
