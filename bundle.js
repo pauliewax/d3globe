@@ -46092,8 +46092,8 @@ features: [
 ]
 };
 
-let amountEmptyResults;
-let successfulRequests;
+let badRequests;
+let goodRequests;
 
 $('#numEntries').change(function(e){
   $('#entriesDisplay')[0].innerText = `${e.currentTarget.value}`;
@@ -46116,8 +46116,8 @@ $('#searchForm').submit(function(e){
   ]
   };
 
-  amountEmptyResults = 0;
-  successfulRequests = 0;
+  badRequests = 0;
+  goodRequests = 0;
 
   if  (globalId !== 'world') {
     $.ajax({
@@ -46175,12 +46175,10 @@ function geocoder(listings) {
   let globalId = $('#siteVersion').find(':selected').data('id');
   let ebayListings = listings.findItemsByKeywordsResponse[0].searchResult[0].item;
 
-  successfulRequests += 1;
-
   if (ebayListings) {
-    let allRequests = [];
+    let unfinishedRequests = [];
     ebayListings.forEach((listing)=>{
-      allRequests.push(
+      unfinishedRequests.push(
         $.ajax({
           type: 'GET',
           url: 'https://maps.googleapis.com/maps/api/geocode/json',
@@ -46197,9 +46195,10 @@ function geocoder(listings) {
       );
     });
 
-    $.when.apply($, allRequests).then(function() {
+    $.when.apply($, unfinishedRequests).then(function() {
+      goodRequests += 1;
       if (globalId === 'world') {
-        if (successfulRequests === 19) {
+        if (goodRequests + badRequests === 19) {
           $('#loader').removeClass('loader');
         }
       } else {
@@ -46208,11 +46207,13 @@ function geocoder(listings) {
     });
   } else {
     let searchQuery = $('#searchQuery').val();
-    amountEmptyResults += 1;
+    badRequests += 1;
     console.log("eBay Finding API returned zero results for a region");
-    if (amountEmptyResults === 19 || globalId !== 'world') {
+    if (badRequests === 19 || globalId !== 'world') {
       $('#loader').removeClass('loader');
       alert(`No results found for "${searchQuery}"`);
+    } else if (goodRequests + badRequests === 19){
+      $('#loader').removeClass('loader');
     }
   }
 }
