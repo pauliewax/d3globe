@@ -46092,12 +46092,17 @@ let geoJSON = {
 
 let badRequests;
 let goodRequests;
+let errors = ["Daily limit for queries to Google Geocoding API exceeded", "No results found for Boisie, Idaho"];
 
 $('#numEntries').change(function(e){
   $('#entriesDisplay')[0].innerText = `${e.currentTarget.value}`;
 });
 
 $('#searchForm').submit(ebayQuery);
+
+function handleErrors() {
+  $('#errors')[0].innerText = errors.join(',');
+}
 
 function ebayQuery(e){
   e.preventDefault();
@@ -46118,6 +46123,8 @@ function ebayQuery(e){
 
   badRequests = 0;
   goodRequests = 0;
+  errors = [];
+  handleErrors();
 
   if  (globalId !== 'world') {
     $.ajax({
@@ -46187,7 +46194,7 @@ function geocoder(listings) {
             "key": "AIzaSyA0QnQQk7D3mtmaW5IQmxJCdIbMfoAsaOU"
           },
           success: function(geocode) {
-            if (geocode.error_message) { alert('Daily limit for queries to Google Maps Geocoding API exceeded');}
+            if (geocode.error_message) { errors.push("Daily limit for queries to Google Geocoding API exceeded"); }
             geocode.results[0] ? featureBuilder(listing, geocode.results[0].geometry.location) : console.log(`Google Maps Geocoding API could not find coordinates for ${listing.location}`);
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["a" /* drawMarkers */])(geoJSON);
           },
@@ -46196,6 +46203,7 @@ function geocoder(listings) {
     });
 
     $.when.apply($, unfinishedRequests).then(function() {
+      handleErrors();
       goodRequests += 1;
       if (globalId === 'world') {
         if (goodRequests + badRequests === 19) {
@@ -46211,10 +46219,11 @@ function geocoder(listings) {
     console.log("eBay Finding API returned zero results for a region");
     if (badRequests === 19 || globalId !== 'world') {
       $('#loader').removeClass('loader');
-      alert(`No results found for "${searchQuery}"`);
+      errors.push(`No results found for ${searchQuery}`);
     } else if (goodRequests + badRequests === 19){
       $('#loader').removeClass('loader');
     }
+    handleErrors();
   }
 }
 
@@ -46245,6 +46254,7 @@ geoJSON.features.push(geojsonFeature);
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["b" /* drawWater */])();
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["c" /* drawMap */])();
+handleErrors();
 
 window.onload = function() {
   let i = 1;
