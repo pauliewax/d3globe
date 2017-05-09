@@ -79,7 +79,7 @@ let svg = d3.select('body')
 
 let orthoProjection = d3.geoOrthographic()
   .scale(window.innerHeight / 2.2)
-  .rotate([20, 0, 0])
+  .rotate([40, -20, 0])
   .clipAngle(90)
   .translate([(window.innerWidth * 0.8 / 2), window.innerHeight / 2]);
 
@@ -90,14 +90,12 @@ let geoPath = d3.geoPath()
 let sensitivity = 0.25;
 
 let water = svg.append('g')
-  .attr('class', 'water');
+  .attr('class', 'water draggable');
 
 const drawWater = function() {
   water.append('path')
     .datum({type: "Sphere"})
     .attr("d", geoPath)
-    .style('fill', '#4BD4E9')
-    .style('opacity', 0.3)
     .call(d3.drag()
       .subject(function() { let r = orthoProjection.rotate(); return {x: r[0] / sensitivity, y: -r[1] / sensitivity}; })
       .on("drag", function() {
@@ -109,7 +107,7 @@ const drawWater = function() {
 
 
 let world = svg.append('g')
-  .attr('class', 'world');
+  .attr('class', 'world draggable');
 
 const drawMap = function() {
 
@@ -46099,7 +46097,9 @@ $('#numEntries').change(function(e){
   $('#entriesDisplay')[0].innerText = `${e.currentTarget.value}`;
 });
 
-$('#searchForm').submit(function(e){
+$('#searchForm').submit(ebayQuery);
+
+function ebayQuery(e){
   e.preventDefault();
   let searchQuery = $('#searchQuery').val(),
   minPrice = $('#minPrice').val(),
@@ -46168,8 +46168,7 @@ $('#searchForm').submit(function(e){
       });
     });
   }
-
-});
+}
 
 function geocoder(listings) {
   let globalId = $('#siteVersion').find(':selected').data('id');
@@ -46235,7 +46234,7 @@ function featureBuilder(listing, coords) {
   properties: {
   title: listing.title[0],
   price: listing.sellingStatus[0].convertedCurrentPrice[0].__value__,
-  currency: Object.values(listing.sellingStatus[0].convertedCurrentPrice[0])[0], //under key @currencyId, can't be invoked
+  currency: Object.values(listing.sellingStatus[0].convertedCurrentPrice[0])[0], //under key starting with @, can't do listing.@currencyId
   url: listing.viewItemURL[0],
   img: listing.galleryURL ? listing.galleryURL[0] : ''
   }
@@ -46245,6 +46244,9 @@ geoJSON.features.push(geojsonFeature);
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["b" /* drawWater */])();
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["c" /* drawMap */])();
+window.onload = function() {
+  $('#searchForm').submit();
+};
 
 
 /***/ })

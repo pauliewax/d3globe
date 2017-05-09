@@ -2,7 +2,24 @@
   fill: #4BD4E9;
   stroke: white;
   stroke-width: 1px;
+}
+
+.water {
+  fill: #4BD4E9;
+  opacity: 0.3;
+}
+
+.draggable {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.draggable:active {
   cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }
 
 svg {
