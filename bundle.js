@@ -46187,7 +46187,7 @@ function geocoder(listings) {
             "key": "AIzaSyA0QnQQk7D3mtmaW5IQmxJCdIbMfoAsaOU"
           },
           success: function(geocode) {
-            console.log(geocode);
+            if (geocode.error_message) { alert('Daily limit for queries to Google Maps Geocoding API exceeded');}
             geocode.results[0] ? featureBuilder(listing, geocode.results[0].geometry.location) : console.log(`Google Maps Geocoding API could not find coordinates for ${listing.location}`);
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["a" /* drawMarkers */])(geoJSON);
           },
