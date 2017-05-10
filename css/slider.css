@@ -22,7 +22,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 30px;
   width: 12px;
   border-radius: 0px;
-  background: #BEC9D5;
+  background: #4c5055;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -11.5px;
@@ -46,7 +46,7 @@ input[type=range]::-moz-range-thumb {
   height: 30px;
   width: 12px;
   border-radius: 0px;
-  background: #BEC9D5;
+  background: #4c5055;
   cursor: pointer;
 }
 input[type=range]::-ms-track {
@@ -76,7 +76,7 @@ input[type=range]::-ms-thumb {
   height: 30px;
   width: 12px;
   border-radius: 0px;
-  background: #BEC9D5;
+  background: #4c5055;
   cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {
