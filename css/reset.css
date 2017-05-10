@@ -19,6 +19,11 @@ td, button, figure, input, select, aside {
   list-style: none;
 }
 
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
 body {
   line-height: 1;
 }
