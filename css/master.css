@@ -97,8 +97,9 @@ body {
   cursor: pointer;
   margin-bottom: 2%;
   -webkit-appearance: none;
-  background: white url("../arrow.svg") no-repeat right;
-  background-size: calc(1em + 6%);
+  background: white url("../arrow1.png") no-repeat;
+  background-position: 97%;
+  background-size: 1em;
   border-radius: 0;
 }
 
