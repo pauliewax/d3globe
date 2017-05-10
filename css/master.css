@@ -115,9 +115,9 @@ body {
   color: white;
   font-weight: 700;
   font-size: 1.3em;
-  /*cursor: pointer;
+  cursor: pointer;
   margin-bottom: 5%;
-  transition: all 175ms ease;*/
+  transition: all 175ms ease;
 }
 
 #submitBtn:hover {
