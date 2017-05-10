@@ -111,7 +111,7 @@ body {
 #submitBtn {
   background-color: #4c5055;
   width: 100%;
-  height: 6%;
+  /*height: 6%;*/
   color: white;
   font-weight: 700;
   font-size: 1.3em;
