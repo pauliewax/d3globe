@@ -92,12 +92,14 @@ body {
 }
 
 #siteVersion{
-  background: white;
   width: 100%;
   padding: 3%;
   cursor: pointer;
   margin-bottom: 2%;
   -webkit-appearance: none;
+  background: white url("../arrow.svg") no-repeat right;
+  background-size: calc(1em + 6%);
+  border-radius: 0;
 }
 
 #regionNote {
