@@ -46085,6 +46085,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__globe__ = __webpack_require__(0);
 
 
+let memo = {};
+
 let geoJSON = {
   type: "FeatureCollection",
   features: [
@@ -46191,31 +46193,40 @@ function geocoder(listings) {
   if (ebayListings) {
     let unfinishedRequests = [];
     ebayListings.forEach((listing)=>{
-      unfinishedRequests.push(
-        $.ajax({
-          type: 'GET',
-          url: 'https://maps.googleapis.com/maps/api/geocode/json',
-          dataType:'json',
-          data: {
-            "address": `${listing.location[0]}`,
-            "key": "AIzaSyA0QnQQk7D3mtmaW5IQmxJCdIbMfoAsaOU"
-          },
-          success: function(geocode) {
-            if (geocode.error_message) {
-              console.log(geocode.error_message);
-              if (!errors.includes("Exceeded daily limit on queries to Geocoding API.")) {
-                errors.push("Exceeded daily limit on queries to Geocoding API.");
+      if (memo[listing.location[0]]) {
+        console.log(`Using coordinates for ${listing.location[0]} from memo`);
+        featureBuilder(listing, memo[listing.location[0]]);
+      } else {
+        unfinishedRequests.push(
+          $.ajax({
+            type: 'GET',
+            url: 'https://maps.googleapis.com/maps/api/geocode/json',
+            dataType:'json',
+            data: {
+              "address": `${listing.location[0]}`,
+              "key": "AIzaSyA0QnQQk7D3mtmaW5IQmxJCdIbMfoAsaOU"
+            },
+            success: function(geocode) {
+              if (geocode.error_message) {
+                console.log(geocode.error_message);
+                if (!errors.includes("Exceeded daily limit on queries to Geocoding API.")) {
+                  errors.push("Exceeded daily limit on queries to Geocoding API.");
+                }
+              } else if (geocode.results[0])  {
+                memo[listing.location[0]] = geocode.results[0].geometry.location;
+                featureBuilder(listing, geocode.results[0].geometry.location);
+              } else {
+                console.log(`Google Maps Geocoding API could not find coordinates for ${listing.location}`);
               }
-            }
-            geocode.results[0] ? featureBuilder(listing, geocode.results[0].geometry.location) : console.log(`Google Maps Geocoding API could not find coordinates for ${listing.location}`);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["a" /* drawMarkers */])(geoJSON);
-          },
-          error: function (jqXHR, status, err) {
-            console.log('Error from Google API', err);
-            badRequests += 1;
-          },
-        })
-      );
+              __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["a" /* drawMarkers */])(geoJSON);
+            },
+            error: function (jqXHR, status, err) {
+              console.log('Error from Google API', err);
+              badRequests += 1;
+            },
+          })
+        );
+      }
     });
 
     $.when.apply($, unfinishedRequests).then(function() {
