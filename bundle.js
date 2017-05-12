@@ -46202,12 +46202,17 @@ function geocoder(listings) {
           },
           success: function(geocode) {
             if (geocode.error_message) {
+              console.log(geocode.error_message);
               if (!errors.includes("Exceeded daily limit on queries to Geocoding API.")) {
                 errors.push("Exceeded daily limit on queries to Geocoding API.");
               }
             }
             geocode.results[0] ? featureBuilder(listing, geocode.results[0].geometry.location) : console.log(`Google Maps Geocoding API could not find coordinates for ${listing.location}`);
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["a" /* drawMarkers */])(geoJSON);
+          },
+          error: function (jqXHR, status, err) {
+            console.log('Error from Google API', err);
+            badRequests += 1;
           },
         })
       );
