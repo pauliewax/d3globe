@@ -46194,7 +46194,8 @@ function geocoder(listings) {
     let unfinishedRequests = [];
     ebayListings.forEach((listing)=>{
       if (memo[listing.location[0]]) {
-        featureBuilder(listing, window.memo[listing.location[0]]);
+        console.log(`Using coordinates for ${listing.location[0]} from memo`);
+        featureBuilder(listing, memo[listing.location[0]]);
       } else {
         unfinishedRequests.push(
           $.ajax({
