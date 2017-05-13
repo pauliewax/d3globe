@@ -46196,6 +46196,7 @@ function geocoder(listings) {
       if (memo[listing.location[0]]) {
         console.log(`Using coordinates for ${listing.location[0]} from memo`);
         featureBuilder(listing, memo[listing.location[0]]);
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__globe__["a" /* drawMarkers */])(geoJSON);
       } else {
         unfinishedRequests.push(
           $.ajax({
