@@ -46153,8 +46153,8 @@ function ebayQuery(e){
         "GLOBAL-ID": `EBAY-${globalId}`,
       },
       success: geocoder,
-      error: function (jqXHR, status, err) {
-        console.log('Error from eBay API', err);
+      error: function (jqXHR, exception) {
+        console.log(exception);
         $('#loader').removeClass('loader');
       },
     });
@@ -46185,8 +46185,8 @@ function ebayQuery(e){
           "GLOBAL-ID": `EBAY-${globalId}`,
         },
         success: geocoder,
-        error: function (jqXHR, status, err) {
-          console.log('Error from eBay API', err);
+        error: function (jqXHR, exception) {
+          console.log(exception);
           $('#loader').removeClass('loader');
         },
       });
