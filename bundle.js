@@ -46154,7 +46154,9 @@ function ebayQuery(e){
       },
       success: geocoder,
       error: function (jqXHR, exception) {
-        console.log(exception);
+        if (!errors.includes("eBay API returned an Internal Error")) {
+          errors.push("eBay API returned an Internal Error");
+        }
         $('#loader').removeClass('loader');
       },
     });
@@ -46186,12 +46188,15 @@ function ebayQuery(e){
         },
         success: geocoder,
         error: function (jqXHR, exception) {
-          console.log(exception);
+          if (!errors.includes("eBay API returned an Internal Error")) {
+            errors.push("eBay API returned an Internal Error");
+          }
           $('#loader').removeClass('loader');
         },
       });
     });
   }
+  handleErrors();
 }
 
 function geocoder(listings) {
