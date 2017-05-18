@@ -46152,7 +46152,10 @@ function ebayQuery(e){
         "paginationInput.entriesPerPage": `${numResults}`,
         "GLOBAL-ID": `EBAY-${globalId}`,
       },
-      success: geocoder
+      success: geocoder,
+      error: function (jqXHR, status, err) {
+        console.log('Error from eBay API', err);
+      },
     });
   } else {
     let countries = $('option').filter((idx, op)=>op.dataset.id !== 'world');
@@ -46180,7 +46183,10 @@ function ebayQuery(e){
           "paginationInput.entriesPerPage": `${numResults}`,
           "GLOBAL-ID": `EBAY-${globalId}`,
         },
-        success: geocoder
+        success: geocoder,
+        error: function (jqXHR, status, err) {
+          console.log('Error from eBay API', err);
+        },
       });
     });
   }
