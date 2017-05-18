@@ -101,8 +101,14 @@ const drawWater = function() {
       .on("drag", function() {
       orthoProjection.rotate([d3.event.x * sensitivity, -d3.event.y * sensitivity]);
       svg.selectAll("path").attr("d", geoPath);
-  }));
-}
+    }))
+
+    .on('mouseover', function(d) {
+      d3.selectAll('.tooltip').transition()
+        .duration(200)
+        .style('opacity', 0);
+    });
+};
 /* harmony export (immutable) */ __webpack_exports__["b"] = drawWater;
 
 
@@ -124,7 +130,13 @@ const drawMap = function() {
       .on("drag", function() {
         orthoProjection.rotate([d3.event.x * sensitivity, -d3.event.y * sensitivity]);
         svg.selectAll("path").attr("d", geoPath);
-    }));
+    }))
+
+    .on('mouseover', function(d) {
+      d3.selectAll('.tooltip').transition()
+        .duration(200)
+        .style('opacity', 0);
+    });
 };
 /* harmony export (immutable) */ __webpack_exports__["c"] = drawMap;
 
@@ -166,11 +178,6 @@ const drawMarkers = function(geojson) {
         .style('left', (xCoord) + "px")
         .style('top', (d3.event.pageY) + "px");
     })
-    .on('mouseout', function(d){
-      tooltip.transition()
-        .duration(200)
-        .style('opacity', 0);
-    });
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = drawMarkers;
 

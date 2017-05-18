@@ -34,11 +34,11 @@ svg {
 }
 
 .tooltip {
+  pointer-events: none;
   position: absolute;
   width: 10%;
   font: .9em sans-serif;
   background: transparent;
-  pointer-events: none;
   opacity: 0;
   display: flex;
   flex-direction: column;
