@@ -46155,6 +46155,7 @@ function ebayQuery(e){
       success: geocoder,
       error: function (jqXHR, status, err) {
         console.log('Error from eBay API', err);
+        $('#loader').removeClass('loader');
       },
     });
   } else {
@@ -46186,6 +46187,7 @@ function ebayQuery(e){
         success: geocoder,
         error: function (jqXHR, status, err) {
           console.log('Error from eBay API', err);
+          $('#loader').removeClass('loader');
         },
       });
     });
